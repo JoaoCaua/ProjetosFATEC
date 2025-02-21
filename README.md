@@ -1,4 +1,5 @@
 # Projetos
+git clone https://github.com/JoaoCaua/ProjetosFATEC.git
 
 git config --global user.name "JoaoCaua"
 
