@@ -28,7 +28,7 @@ public class ClienteController{
     public ResponseEntity<Cliente> CriarCliente(@RequestBody Cliente cliente){
         cliente.setId(idCount++);
         clientes.add(cliente);
-
+        // logger.info(format:"Recebido JSON: Nome={}, Idade={}", cliente.getNome(), cliente.getIdade());
         return "O cliente "+cliente.getNome()+" de idade"+cliente.getIdade()+" foi criado";
         return new ResponseEntity<>(cliente, HttpStatus.OK);
     }
