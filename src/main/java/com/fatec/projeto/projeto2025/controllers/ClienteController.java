@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestBody;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -28,7 +31,7 @@ public class ClienteController{
     public ResponseEntity<Cliente> CriarCliente(@RequestBody Cliente cliente){
         cliente.setId(idCount++);
         clientes.add(cliente);
-        // logger.info(format:"Recebido JSON: Nome={}, Idade={}", cliente.getNome(), cliente.getIdade());
+        logger.info("Recebido JSON: Nome={}, Idade={}", cliente.getNome(), cliente.getIdade());
         return "O cliente "+cliente.getNome()+" de idade"+cliente.getIdade()+" foi criado";
         return new ResponseEntity<>(cliente, HttpStatus.OK);
     }

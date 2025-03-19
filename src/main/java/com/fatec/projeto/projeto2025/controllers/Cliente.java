@@ -6,6 +6,10 @@ public class Cliente {
     private Integer idade;
     private String endereco;
 
+    public Cliente(){
+        
+    }
+
     public Cliente(Long id, String nome, Integer idade, String endereco){
         this.id = id;
         this.nome = nome;
@@ -25,15 +29,15 @@ public class Cliente {
         return nome;
     }
 
-    public void setNome(){
+    public void setNome(String nome){
         this.nome = nome;
     }
 
     public Integer getIdade(){
-        return nome;
+        return idade;
     }
 
-    public void setIdade(){
+    public void setIdade(Integer idade){
         this.idade = idade;
     }
 
@@ -41,7 +45,7 @@ public class Cliente {
         return endereco;
     }
 
-    public void setEndereco(){
+    public void setEndereco(String endereco){
         this.endereco = endereco;
     }
 }
