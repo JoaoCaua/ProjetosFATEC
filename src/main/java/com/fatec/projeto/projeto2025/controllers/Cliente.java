@@ -1,4 +1,5 @@
-package main.java.com.fatec.projeto.projeto2025.controllers;
+package com.fatec.projeto.projeto2025.controllers;
+// package main.java.com.fatec.projeto.projeto2025.controllers;
 
 public class Cliente {
     private Long id;

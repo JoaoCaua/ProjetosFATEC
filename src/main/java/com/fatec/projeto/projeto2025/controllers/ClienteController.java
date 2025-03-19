@@ -1,7 +1,8 @@
 package com.fatec.projeto.projeto2025.controllers;
+// import main.java.com.fatec.projeto.projeto2025.controllers.Cliente;
 
 import org.springframework.web.bind.annotation.RestController;
-import main.java.com.fatec.projeto.projeto2025.controllers.Cliente;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,9 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import java.util.ArrayList;
 import java.util.List;
 // import java.util.logging.Logger;
@@ -35,7 +35,6 @@ public class ClienteController{
         clientes.add(cliente);
         logger.info("Recebido JSON: Nome={}, Idade={}", cliente.getNome(), cliente.getIdade());
         // return "O cliente "+cliente.getNome()+" de idade"+cliente.getIdade()+" foi criado";
-        // mvn spring-boot:run
         return new ResponseEntity<>(cliente, HttpStatus.OK);
     }
 
