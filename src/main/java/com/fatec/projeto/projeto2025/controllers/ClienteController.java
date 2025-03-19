@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+// import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/cliente")
@@ -22,9 +24,9 @@ public class ClienteController{
     private final List<Cliente> clientes = new ArrayList<>();
     private Long idCount = 1L;
 
-    ClienteController (ExercicioController exercicioController){
-        this.exercicioController = exercicioController;
-    }
+    // ClienteController (ExercicioController exercicioController){
+        // this.exercicioController = exercicioController;
+    // }
 
     // http://localhost:8080/api/cliente/criarCliente => POST
     @PostMapping("/criarCliente")
@@ -32,7 +34,8 @@ public class ClienteController{
         cliente.setId(idCount++);
         clientes.add(cliente);
         logger.info("Recebido JSON: Nome={}, Idade={}", cliente.getNome(), cliente.getIdade());
-        return "O cliente "+cliente.getNome()+" de idade"+cliente.getIdade()+" foi criado";
+        // return "O cliente "+cliente.getNome()+" de idade"+cliente.getIdade()+" foi criado";
+        // mvn spring-boot:run
         return new ResponseEntity<>(cliente, HttpStatus.OK);
     }
 
