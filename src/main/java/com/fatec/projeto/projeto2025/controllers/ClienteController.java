@@ -5,6 +5,8 @@ import com.fatec.projeto.projeto2025.entities.Cliente;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,21 +30,15 @@ public class ClienteController{
 
     // http://localhost:8080/api/cliente/criarCliente => POST
     @PostMapping("/criarCliente")
-    public ResponseEntity<Cliente> CriarCliente(@RequestBody Cliente cliente){
-        cliente.setId(idCount++);
-        clientes.add(cliente);
-        logger.info("Recebido JSON: Nome={}, Idade={}, Endereco={}", cliente.getNome(), cliente.getIdade(), cliente.getEndereco());
+    public ResponseEntity<Cliente> criarCliente(@RequestBody Cliente cliente){
+        Cliente novoCliente = clienteService.criarCliente(cliente);
+        // cliente.setId(idCount++);
+        // clientes.add(cliente);
+        logger.info("Recebido JSON: Nome={}, Idade={}, Endereco={}", novoCliente.getNome(), novoCliente.getIdade(), novoCliente.getEndereco());
         // return "O cliente "+cliente.getNome()+ " de idade "+cliente.getIdade()+" foi criado";
-        return new ResponseEntity<>(cliente, HttpStatus.OK);
+        // return new ResponseEntity<>(cliente, HttpStatus.OK);
+        return new ResponseEntity<>(novoCliente, HttpStatus.CREATED);
     }
-    /*/ 
-    {
-        "id": 0,
-        "nome": "string",
-        "idade": 0,
-        "endereco": "string"
-    }
-    /*/ 
 
     // http://localhost:8080/api/cliente/listarClientes => GET
     @GetMapping("/listarClientes")
@@ -82,11 +78,25 @@ public class ClienteController{
     // http://localhost:8080/api/cliente/buscarCliente/{id} => GET
     @GetMapping("/buscarCliente/{id}")
     public ResponseEntity<?> buscarClientePorId(@PathVariable Long id){
+        Optional<Cliente> cliente = clienteService.buscarClientePorId(id);
+        return cliente.<ResponseEntity<?>>map(ResponseEntity::ok)
+        .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com ID: " + id + " não encontrado."));
+        /*
         for(Cliente cliente : clientes){
             if(cliente.getId().equals(id)){
                 return ResponseEntity.ok(cliente);
             }
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com ID " + id + " não encontrado.");
+        */
     }
+
+    /*
+    {
+        "id": 0,
+        "nome": "string",
+        "idade": 0,
+        "endereco": "string"
+    }
+    */ 
 }
