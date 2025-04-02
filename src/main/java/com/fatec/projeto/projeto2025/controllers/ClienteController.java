@@ -49,6 +49,15 @@ public class ClienteController{
 
     // http://localhost:8080/api/cliente/deletarCliente/{id} => DELETE
     @DeleteMapping("/deletarCliente/{id}")
+    public ResponseEntity<String> deletarCliente(@PathVariable Long id){
+        boolean removido = clienteService.deletarCliente(id);
+            if(removido){
+                return ResponseEntity.ok("Cliente removido com sucesso!");
+            }else{
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Não existe cliente com id: " + id);
+            }
+    }
+    /*
     public String DeletarClientes(@PathVariable Long id){
         for( Cliente cliente: clientes){
             if(cliente.getId().equals(id)){
@@ -58,10 +67,18 @@ public class ClienteController{
         }
         return "Não existe cliente com id: " + id;
     }
+    */
 
     // http://localhost:8080/api/cliente/atualizarCliente/{id} => PUT
     @PutMapping("/atualizarCliente/{id}")
     public ResponseEntity<String> atualizarCliente(@PathVariable Long id, @RequestBody Cliente clienteAtualizado){
+        boolean atualizado = clienteService.atualizarCliente(id, clienteAtualizado);
+        if(atualizado){
+            return ResponseEntity.ok("Cliente atualizado com sucesso!");
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com ID " + id + " não encontrado.");
+        }
+        /*
         for( Cliente cliente: clientes){
             if(cliente.getId().equals(id)){
                 cliente.setNome(clienteAtualizado.getNome());
@@ -73,6 +90,7 @@ public class ClienteController{
             }
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente com ID " + id + " não encontrado.");
+        */
     }
 
     // http://localhost:8080/api/cliente/buscarCliente/{id} => GET

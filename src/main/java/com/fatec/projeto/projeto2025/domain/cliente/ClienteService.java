@@ -32,7 +32,7 @@ public class ClienteService {
         return clienteCriado;
     }
 
-    /*/ public boolean atualizarCliente(Long id, Cliente clienteAtualizado){
+    public boolean atualizarCliente(Long id, Cliente clienteAtualizado){
         Optional<Cliente> clienteOptional = buscarClientePorId(id);
         if(clienteOptional.isPresent()){
             Cliente cliente = clienteOptional.get();
@@ -45,14 +45,14 @@ public class ClienteService {
         return false;
     }
     
-    public boolean deletarClientes(Long id){
+    public boolean deletarCliente(Long id){
         if(clienteRepository.existsById(id)){
             clienteRepository.deleteById(id);
             return true;
         }
         return false;
     }
-    */
+    
     public Optional<Cliente> buscarClientePorId(Long id){
         return clienteRepository.findById(id);
     }
